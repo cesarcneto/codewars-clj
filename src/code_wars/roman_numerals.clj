@@ -1,4 +1,4 @@
-(ns code-wards.roman-numerals)
+(ns code-wars.roman-numerals)
 
 ; Kata URL - https://www.codewars.com/kata/51b6249c4612257ac0000005
 ; Create a function that takes a Roman numeral as its argument and returns its value as a numeric decimal integer. You don't need to validate the form of the Roman numeral.
@@ -25,23 +25,10 @@
                     \D 500
                     \M 1000})
 
-(defn translate-roman-numerals-v1 [roman]
-  (loop [values (reverse (map #(get char-to-value %) (seq roman)))
-         acc 0]
-    (let [x (first values)
-          y (second values)]
-      (if (nil? y)
-        (+ acc x)
-        (recur
-         (rest values)
-         (if (and (or (= y 1) (= (mod y 10) 0)) (> x y))
-           (+ acc (- x (* 2 y)))
-           (+ acc x)))))))
-
 (defn roman-op [x y]
   (if (< x y) + -))
 
-(defn translate-roman-numerals-v2 [roman]
+(defn translate-roman-numerals [roman]
   (->> (map #(get char-to-value %) roman)
        (reverse)
        (partition-by identity)
